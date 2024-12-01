@@ -1,0 +1,8 @@
+{
+  "name": "PassBi",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular",
+  "id": "dc539f78"
+}
