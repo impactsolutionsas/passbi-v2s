@@ -1,0 +1,48 @@
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>FIN DE SERVICE</ion-card-title>
+    </ion-card-header>
+  </ion-card>
+  <ion-card class="repport-card">
+    <ion-card-header class="empty-card-content">
+        <strong>Ventes Total: {{currentSession?.revenue}} CFA </strong>
+        <strong>Location: {{ sumRentals() }} CFA </strong>
+        <strong>Dépenses: {{currentSession?.expense}} CFA </strong>
+        <strong>Net à verser: {{currentSession?.solde}} CFA </strong>
+    </ion-card-header>
+    <ion-card-content *ngIf="dailyCode=== false">
+      <ion-button expand="full" class="login-button" (click)="end()">
+        TERMINER
+      </ion-button>
+    </ion-card-content>
+    <ion-card-content *ngIf="dailyCode && isPaid">
+      <ion-button expand="full" class="login-button" (click)="end()">
+        TERMINER
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+  <ion-card *ngIf="dailyCode && isPaid === false" class="empty-card">
+    <ion-card-header class="empty-card-header">
+      <ion-icon name="alert-circle-outline" color="medium" class="empty-icon"></ion-icon>
+      <ion-card-title class="empty-title">CODE DU JOUR</ion-card-title>
+    </ion-card-header>
+    <ion-card-content class="empty-card-content">
+      <p class="empty-message">Vous n'avaez pas payés l'abonnement du jour</p>
+      <ion-card-title>Entrez le code d'activation</ion-card-title>
+      <form [formGroup]="codeForm" (ngSubmit)="onSubmit()">
+        <fieldset class="input-item">
+          <legend>Code d'Activation</legend>
+          <ion-input type="password" formControlName="code" >
+            <ion-input-password-toggle slot="end" color="dark"></ion-input-password-toggle>
+          </ion-input>
+        </fieldset><br>
+      <ion-button expand="full" (click)="onSubmit()" type="submit" class="login-button" [disabled]="!codeForm.valid">
+        Activer
+      </ion-button>
+    </form>
+    <ion-text *ngIf="errorMessage" color="danger" aria-live="assertive" role="alert">{{ errorMessage }}</ion-text>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

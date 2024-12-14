@@ -1,0 +1,90 @@
+<ion-content>
+  <ion-card>
+   <ion-fab vertical="top" horizontal="end" (click)="close()">
+     <ion-fab-button color="danger" id="open-loading">
+       <ion-icon name="close-outline"></ion-icon>
+     </ion-fab-button>
+   </ion-fab>
+   <ion-card-header>
+     <ion-card-title>LOCATIONS</ion-card-title>
+   </ion-card-header>
+   <ion-card-content *ngIf="showFrom === false">
+     <br>
+     <ion-button size="small" shape="round" expand="block" (click)="showel(true)">
+       <ion-icon slot="start" name="add-outline"></ion-icon>
+       Ajouter
+     </ion-button>
+   </ion-card-content>
+  </ion-card>
+  <ion-card *ngIf="showFrom === true">
+   <ion-card-header>
+     <ion-card-title>NOUVELLE LOCATION</ion-card-title>
+   </ion-card-header>
+   <ion-card-content>
+     <ion-list lines="none">
+       <form [formGroup]="rentalForm" (ngSubmit)="add()">
+         <ion-row>
+           <ion-col size="12">
+             <ion-item class="ios">
+               <fieldset class="input-item">
+                 <legend>Client</legend>
+                 <ion-input type="text" formControlName="companieName" [clearInput]="true"></ion-input>
+
+               </fieldset>
+             </ion-item>
+           </ion-col>
+           <ion-col size="12">
+             <ion-item class="ios">
+               <fieldset class="input-item">
+                 <legend>Téléphone</legend>
+                 <ion-input type="text" formControlName="companiePhone" [clearInput]="true"></ion-input>
+               </fieldset>
+             </ion-item>
+           </ion-col>
+           <ion-col size="12" >
+             <ion-item class="ios">
+               <fieldset class="input-item">
+                 <legend>Destinbation</legend>
+                 <ion-input type="text" formControlName="destination" [clearInput]="true"></ion-input>
+               </fieldset>
+             </ion-item>
+           </ion-col>
+           <ion-col size="12" >
+             <ion-item class="ios">
+               <fieldset class="input-item">
+                 <legend>Prix location</legend>
+                 <ion-input type="number" formControlName="price" [clearInput]="true"></ion-input>
+               </fieldset>
+             </ion-item>
+           </ion-col>
+         </ion-row>
+       </form>
+     </ion-list>
+     <ion-button type="submit" (click)="add()" expand="block" [disabled]="!rentalForm.valid">
+       Valider
+     </ion-button>
+   </ion-card-content>
+   </ion-card>
+   <div  *ngIf="showFrom === false">
+   <ion-card *ngFor="let item of rentalsList">
+    <ion-fab vertical="top" horizontal="end" (click)="editRental(item.offlineId)">
+      <ion-fab-button>
+        <ion-icon name="create-outline"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+    <ion-card-content>
+     <ion-card-title>Client: {{item.companieName}}</ion-card-title>
+     <ion-card-subtitle>Téléphone: {{ item.companiePhone }}</ion-card-subtitle>
+     <ion-card-subtitle>Destination: {{ item.destination }}</ion-card-subtitle>
+     <ion-card-subtitle>Prix: {{ item.price }} CFA </ion-card-subtitle>
+     <ion-card-subtitle>De: {{ item.startTime }} à {{ item.endTime }} </ion-card-subtitle>
+    </ion-card-content>
+    <ion-fab vertical="bottom" horizontal="end" (click)="deleteRental(item.offlineId)">
+      <ion-fab-button color="medium">
+        <ion-icon name="trash-outline"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+   </ion-card>
+
+   </div>
+ </ion-content>

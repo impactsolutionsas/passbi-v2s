@@ -1,0 +1,84 @@
+<ion-content>
+ <ion-card>
+  <ion-fab vertical="top" horizontal="end" (click)="close()">
+    <ion-fab-button color="danger" id="open-loading">
+      <ion-icon name="close-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <ion-card-header>
+    <ion-card-title>CONTRÔLES</ion-card-title>
+  </ion-card-header>
+  <ion-card-content *ngIf="showFrom === false">
+    <br>
+    <ion-button size="small" shape="round" expand="block" (click)="showel(true)">
+      <ion-icon slot="start" name="add-outline"></ion-icon>
+      Ajouter
+    </ion-button>
+  </ion-card-content>
+ </ion-card>
+ <ion-card *ngIf="showFrom === true">
+  <ion-card-header>
+    <ion-card-title>NOUVEAU CONTROLE</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <ion-list lines="none">
+      <form [formGroup]="controlForm" (ngSubmit)="add()">
+        <ion-row>
+          <ion-col size="12">
+            <ion-item class="ios">
+              <fieldset class="input-item">
+                <legend>Contrôlleur(se)</legend>
+                <ion-select formControlName="controllerId"
+                      placeholder="Choisir un(e) Contrôlleur(se)">
+                      <ion-select-option *ngFor="let item of controllers"
+                        [value]="item.id">{{item.name}}</ion-select-option>
+                    </ion-select>
+              </fieldset>
+            </ion-item>
+          </ion-col>
+          <ion-col size="12">
+            <ion-item class="ios">
+              <fieldset class="input-item">
+                <legend>Tickets vérifiés</legend>
+                <ion-input type="number" formControlName="checkedTickets" [clearInput]="true"></ion-input>
+              </fieldset>
+            </ion-item>
+          </ion-col>
+          <ion-col size="12" >
+            <ion-item class="ios">
+              <fieldset class="input-item">
+                <legend>Tickets fraudes</legend>
+                <ion-input type="number" formControlName="ticketFraude" [clearInput]="true"></ion-input>
+              </fieldset>
+            </ion-item>
+          </ion-col>
+          <ion-col size="12">
+            <ion-item class="ios">
+              <fieldset class="input-item">
+              <legend>Commentaire</legend>
+              <ion-textarea formControlName="comment" [autoGrow]="true" rows="3"></ion-textarea>
+            </fieldset>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </form>
+    </ion-list>
+    <ion-button type="submit" (click)="add()" expand="block" [disabled]="!controlForm.valid">
+      Valider
+    </ion-button>
+  </ion-card-content>
+  </ion-card>
+  <div  *ngIf="showFrom === false">
+  <ion-card *ngFor="let item of controlsList">
+   <ion-card-content>
+    <ion-card-title>{{item.controllerName}}</ion-card-title>
+    <ion-card-subtitle>Total tickets contrôlés: {{ item.checkedTickets }}</ion-card-subtitle>
+    <ion-card-subtitle>Total tickets fraudes: {{ item.ticketFraude }}</ion-card-subtitle>
+    <ion-card-subtitle>De: {{ item.startTime }} à {{ item.endTime }} </ion-card-subtitle>
+    <ion-card-subtitle>Commentaire: {{ item.comment }} </ion-card-subtitle>
+
+   </ion-card-content>
+  </ion-card>
+
+  </div>
+</ion-content>

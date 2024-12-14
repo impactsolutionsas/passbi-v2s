@@ -1,0 +1,160 @@
+ion-header {
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+ion-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+ion-card {
+  background-color: #fff;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  padding: 5px;
+  border: 1px solid var(--ion-color-primary);;
+}
+
+
+
+ion-fab-button {
+  --background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  ion-icon {
+    font-size: 1.5rem;
+    color: var(--ion-color-light);
+  }
+}
+
+
+/* Centrer le contenu de l'ion-item */
+ion-item {
+  display: flex;
+  justify-content: space-between; /* Espace entre les éléments du début et de la fin */
+  align-items: center;
+  --background: #fafafa;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 8px 16px;
+  width: 100%;
+  box-sizing: border-box; /* Assure que le padding n'affecte pas la largeur totale */
+}
+
+/* Adapter la classe .points */
+
+
+ion-icon {
+  font-size: 20px;
+}
+
+.card-details {
+  margin-top: 8px;
+  font-size: 1rem;
+  color: #666;
+}
+
+.actions-grid {
+  margin-top: 16px;
+}
+
+ion-button {
+  width: 100%;
+  margin: 4px 0;
+  --border-radius: 10px;
+  --background: var(--ion-color-primary);
+  color: var(--ion-color-light);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+ion-button ion-icon {
+  color: var(--ion-color-light);
+}
+
+ion-button {
+  background-color: transparent;
+}
+ion-segment {
+  --background: var(--ion-color-primary);
+  --indicator-color: var(--ion-color-primary);
+}
+
+ion-segment-button {
+  --background-checked: var(--ion-color-primary);
+  --color-checked: var(--ion-color-primary);
+}
+
+.segment {
+  padding: 10px;
+  font-size: 1.2rem;
+}
+/* Centrer les éléments de la classe .price */
+.price {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 0;
+  margin: 0 auto; /* Centrage horizontal */
+}
+.empty-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+  margin: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background: #f8f9fa; /* Light background color */
+}
+
+.empty-card-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.repport-card-header {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+}
+.empty-icon {
+  font-size: 48px;
+  margin-bottom: 10px;
+  color: #6c757d; /* Medium gray color */
+}
+
+.empty-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #495057; /* Darker text color */
+}
+
+.empty-card-content {
+  font-size: 1rem;
+  color: #6c757d; /* Medium gray text */
+}
+
+.empty-message {
+  margin: 0;
+  line-height: 1.5;
+}
+.price ion-grid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.price ion-col {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

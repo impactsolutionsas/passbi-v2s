@@ -1,0 +1,69 @@
+/* Overall styles */
+ion-content {
+  --ion-background-color: #fff;
+  padding: 20px;
+}
+
+/* Grid and column styles */
+ion-grid {
+  display: flex;
+  justify-content: center;
+}
+
+ion-col {
+  flex: 1;
+  max-width: 768px;
+}
+
+/* Card styles */
+ion-card {
+  background-color: #fff;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  padding: 20px;
+  border: 1px solid var(--ion-color-primary);;
+}
+
+/* Ion-item styles */
+ion-item {
+  margin-bottom: 15px;
+}
+
+ion-label {
+  font-weight: bold;
+}
+
+/* Textarea and Input styles */
+ion-textarea,
+ion-input {
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  padding: 5px 10px;
+  width: 100%;
+}
+
+/* Button styles */
+ion-button {
+  background-color: var(--ion-color-primary);
+  color: #fff;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 4px;
+}
+.input-item{
+  padding-left: 20px;
+  width: 100%;
+  border-radius: 12px;
+  border: 2px solid #e2e2e2;
+  height: 100%;
+  ion-input{
+      margin-top: -12px;
+  }
+}
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+  ion-col {
+    flex: unset;
+    width: 100%;
+  }
+}

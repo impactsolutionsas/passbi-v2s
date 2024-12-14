@@ -1,0 +1,37 @@
+<ion-content [fullscreen]="true">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" size-sm="4"></ion-col>
+      <ion-col size="12" size-sm="4">
+        <div class="container"> <br><br>
+          <h1 class="heading">
+            <img alt="PassBi" src="assets/logo.png" width="300" /><br /><br>
+          </h1>
+          <div class="offline" *ngIf="networkStatus?.connected === false">
+            <img alt="Pas de connexion" src="assets/offline.png" width="100" /><br>
+            <ion-label color="danger">Vous êtes actuellement en mode hors ligne.<br /></ion-label>
+          </div>
+          <br>
+          <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <ion-item>
+              <fieldset class="input-item">
+                <legend>Matricule</legend>
+                <ion-input formControlName="code" type="text" placeholder="Matricule bus"></ion-input>
+              </fieldset>
+            </ion-item>
+
+            <ion-button type="submit" class="login-button" color="dark"  expand="block" [disabled]="!loginForm.valid">
+              Se connecter
+            </ion-button>
+          </form>
+          <br />
+          <h1 class="heading">
+            <img alt="PassBi" src="assets/is.png" width="150" /><br />
+          </h1><br>
+          <ion-badge color="danger">Version Sumni 2025.0.1</ion-badge>
+         </div>
+      </ion-col>
+      <ion-col size="12" size-sm="4"></ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

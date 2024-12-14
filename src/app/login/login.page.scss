@@ -1,0 +1,52 @@
+.heading{
+  font-size: 32px;
+  font-weight: bold;
+  padding-left: 10px;
+  margin-top: 50px;
+}
+.para{
+  font-size: 22px;
+  font-weight: 500;
+  padding-left: 20px;
+  color: #000000;
+}
+.input-item{
+  padding-left: 20px;
+  width: 100%;
+  border-radius: 12px;
+  border: 2px solid #e2e2e2;
+  height: 70px;
+  ion-input{
+      margin-top: -12px;
+  }
+}
+.ion-item{
+  margin-top: 20px;
+}
+
+.login-button{
+  color: #000000;
+  padding-left: 20px;
+  padding-right: 20px;
+  height: 50px;
+  --border-radius: 12px;
+  margin-top: 60px;
+  --box-shadow: none;
+}
+
+.signup-text{
+  a{
+      text-decoration: none;
+      color: var(--ion-color-primary);
+  }
+  padding-right: 20px;
+  text-align: end;
+}
+
+.copyright{
+  text-align: center;
+}
+
+ion-col {
+  text-align: center;
+}

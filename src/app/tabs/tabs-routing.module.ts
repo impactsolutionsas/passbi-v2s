@@ -4,31 +4,43 @@ import { TabsPage } from './tabs.page';
 
 const routes: Routes = [
   {
-    path: 'tabs',
+    path: '',
     component: TabsPage,
     children: [
-      {
-        path: 'tab1',
-        loadChildren: () => import('../tab1/tab1.module').then(m => m.Tab1PageModule)
-      },
-      {
-        path: 'tab2',
-        loadChildren: () => import('../tab2/tab2.module').then(m => m.Tab2PageModule)
-      },
-      {
-        path: 'tab3',
-        loadChildren: () => import('../tab3/tab3.module').then(m => m.Tab3PageModule)
-      },
+        {
+          path: 'home',
+          loadChildren: () => import('../home/home.module').then( m => m.HomePageModule)
+        },
+        {
+          path: 'repport',
+          loadChildren: () => import('../repport/repport.module').then( m => m.RepportPageModule)
+        },
+        {
+          path: 'fees',
+          loadChildren: () => import('../fees/fees.module').then( m => m.FeesPageModule)
+        },
+        {
+          path: 'controle',
+          loadChildren: () => import('../controle/controle.module').then( m => m.ControlePageModule)
+        },
+        {
+          path: 'rental',
+          loadChildren: () => import('../rental/rental.module').then( m => m.RentalPageModule)
+        },
+        {
+          path: 'activation',
+          loadChildren: () => import('../activation/activation.module').then( m => m.ActivationPageModule)
+        },
       {
         path: '',
-        redirectTo: '/tabs/tab1',
+        redirectTo: '/tabs/home',
         pathMatch: 'full'
       }
     ]
   },
   {
     path: '',
-    redirectTo: '/tabs/tab1',
+    redirectTo: '/tabs/home',
     pathMatch: 'full'
   }
 ];

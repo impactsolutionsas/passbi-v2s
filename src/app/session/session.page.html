@@ -1,0 +1,61 @@
+<ion-content class="ion-padding">
+<ion-card>
+  <ion-fab vertical="top" horizontal="end" (click)="logout()">
+    <ion-fab-button color="primary" id="open-loading" color="danger">
+      <ion-icon name="close-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <ion-card-header>
+    <ion-card-title>NOUVELLE SESSION</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <ion-list lines="none">
+      <form [formGroup]="sessionForm" (ngSubmit)="onSubmit()">
+        <ion-row>
+          <ion-col size="12">
+            <ion-item class="ios">
+              <fieldset class="input-item">
+                <legend>Receveur(se)</legend>
+                <ion-input type="text" formControlName="seller" [clearInput]="true"></ion-input>
+              </fieldset>
+            </ion-item>
+          </ion-col>
+          <ion-col size="12">
+            <ion-item class="ios">
+              <fieldset class="input-item">
+                <legend>Chauffeur</legend>
+                <ion-input type="text" formControlName="driver" [clearInput]="true"></ion-input>
+              </fieldset>
+            </ion-item>
+          </ion-col>
+          <ion-col size="12" >
+            <ion-item class="ios">
+              <fieldset class="input-item">
+                <legend>Ligne</legend>
+                <ion-select aria-required="true" formControlName="itineraryId" placeholder="Choisir une ligne"
+                (ionChange)="pointsInput($event)">
+                  <ion-select-option *ngFor="let item of itinerarys" [value]="item.id">{{item.name}}</ion-select-option>
+                </ion-select>
+              </fieldset>
+            </ion-item>
+          </ion-col>
+          <ion-col size="12" *ngIf="showPoints === true">
+            <ion-item class="ios">
+              <fieldset class="input-item">
+              <legend>Terminus</legend>
+              <ion-select aria-required="true" formControlName="rising" placeholder="Choisir un terminus"
+              (ionChange)="buttonInput($event)">
+                <ion-select-option *ngFor="let item of points" [value]="item.name">{{item.name}}</ion-select-option>
+              </ion-select>
+            </fieldset>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </form>
+    </ion-list>
+    <ion-button type="submit" (click)="onSubmit()" expand="block" [disabled]="!sessionForm.valid">
+      Valider
+    </ion-button>
+  </ion-card-content>
+</ion-card>
+</ion-content>

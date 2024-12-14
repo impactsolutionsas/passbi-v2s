@@ -1,0 +1,49 @@
+<ion-content>
+  <ion-card>
+    <ion-fab vertical="top" (click)="menuList()" horizontal="end">
+      <ion-fab-button color="primary" id="open-loading">
+        <ion-icon name="menu-outline"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+    <ion-card-header>
+      <ion-card-title>RAPPORT</ion-card-title>
+    </ion-card-header>
+    <ion-card class="balance-card">
+      <ion-card-content>
+        <div class="balance-info">
+          <ion-label>
+            <h2 class="solde">{{currentSession?.solde}} CFA</h2>
+          </ion-label>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+  </ion-card>
+  <ion-card>
+    <ion-card-header color="primary">
+        <strong>Location: {{sumLocations()}} = {{ sumRentals() }} CFA </strong>
+        <strong>Dépenses: {{currentSession?.expense}} CFA </strong>
+        <strong>Total Contrôles: {{ sumControls() }} </strong>
+    </ion-card-header>
+  </ion-card>
+  <ion-card>
+    <ion-card-header color="primary">
+      <strong>Dernier Ticket vendu</strong>
+      <strong>Heure : {{ currentSession?.lastTicket?.time }}</strong>
+      <strong>{{ currentSession?.lastTicket?.name }} </strong>
+    </ion-card-header>
+  </ion-card>
+  <ion-card *ngFor="let item of currentSession?.trips">
+    <ion-card-header color="primary" *ngIf="item.isActivated">
+      <strong>En cours depuis {{item.departureTime}}</strong>
+    </ion-card-header><br>
+    <ion-card-content>
+      <ion-card-title>#{{item.number}} - {{item?.rising}} - {{item?.destination}}</ion-card-title>
+      <ion-card-subtitle>Ventes : {{ item.revenue }} CFA</ion-card-subtitle>
+      <p>Tickets : {{ item.ticketsCount }}</p>
+      <div *ngFor="let rate of currentSession?.itinerary?.Rate">
+        <p>{{ rate.name }} : {{ getTicketCountByRate(item, rate) }}, Total: {{ sumTicketsByRate(item, rate) }} CFA</p>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
