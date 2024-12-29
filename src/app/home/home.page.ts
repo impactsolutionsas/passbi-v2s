@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { AlertController, ActionSheetController, Platform } from '@ionic/angular';
+import { AlertController, ActionSheetController, Platform, LoadingController, ToastController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { SessionService } from '../services/session/session.service';
 import { Router } from '@angular/router';
@@ -41,7 +41,9 @@ export class HomePage implements OnInit {
     private platform: Platform,
     private router: Router,
     private storage: Storage,
-    private actionSheetCtrl: ActionSheetController
+    private toastController: ToastController,
+    private actionSheetCtrl: ActionSheetController,
+    private loadingController: LoadingController,
   ) {
     this.storage.create();
     this.today = new Date().toLocaleDateString('fr-FR')
@@ -204,12 +206,35 @@ export class HomePage implements OnInit {
 
       this.currentSession.trips?.push(newTrip);
       this.currentSession.trajetCount = this.currentSession.trips?.length || 1 + 1 ;
-      await this.sessionService.updateSession(this.currentSession);
+      await this.sessionService.localUpdateSession(this.currentSession);
       this.tripCountBySession = this.currentSession.trips?.length
       this.lastTrip = newTrip;
     } catch (error) {
       console.error("Erreur lors de l'ajout du nouveau trip:", error);
     }
+  }
+
+  async sync(){
+    if (!this.currentSession) {
+      console.error(
+        "Session courante manquante, impossible d'ajouter un nouveau trip."
+      );
+      return;
+    }else{
+      const loading = await this.loadingController.create({
+        message: 'Synchronisation encours ...',
+      });
+      await loading.present();
+      const toast = await this.toastController.create({
+        message: 'Erreur de synchronisation',
+        duration: 1500,
+        position: 'bottom',
+      });
+      this.sessionService.updateSession(this.currentSession)
+      .catch(async er => toast.present())
+      .then(() => loading.dismiss());
+    }
+
   }
 
   async newTrip(rising: string) {

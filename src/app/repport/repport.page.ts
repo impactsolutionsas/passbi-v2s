@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Rate, Session, Trip } from '../services/models/session.model';
 import { SessionService } from '../services/session/session.service';
-import { Platform, ActionSheetController } from '@ionic/angular';
+import { Platform, ActionSheetController, ToastController, LoadingController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth/auth.service';
@@ -25,6 +25,8 @@ export class RepportPage implements OnInit {
     private storage: Storage,
     private authService: AuthService,
     private localDB: DatabaseService,
+    private toastController: ToastController,
+    private loadingController: LoadingController,
     private actionSheetCtrl: ActionSheetController) {
       this.storage.create();
     }
@@ -133,6 +135,29 @@ export class RepportPage implements OnInit {
     });
 
     await actionSheet.present();
+  }
+
+  async sync(){
+    if (!this.currentSession) {
+      console.error(
+        "Session courante manquante, impossible d'ajouter un nouveau trip."
+      );
+      return;
+    }else{
+      const loading = await this.loadingController.create({
+        message: 'Synchronisation encours ...',
+      });
+      await loading.present();
+      const toast = await this.toastController.create({
+        message: 'Erreur de synchronisation',
+        duration: 1500,
+        position: 'bottom',
+      });
+      this.sessionService.updateSession(this.currentSession)
+      .catch(async er => toast.present())
+      .then(() => loading.dismiss());
+    }
+
   }
 }
 

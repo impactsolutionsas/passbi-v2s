@@ -9,6 +9,7 @@
     </ion-fab>
     <ion-card-header>
       <ion-card-title>BUS {{device?.Vehicule?.matricule}} -- {{currentSession?.itinerary?.name}}</ion-card-title>
+      <ion-card-subtitle>{{today}}</ion-card-subtitle>
     </ion-card-header>
     <ion-card class="balance-card">
       <ion-card-content>
@@ -38,6 +39,7 @@
             </ion-label>
             <div class="metadata-end-wrapper" slot="end">
               <ion-note color="medium">{{currentSession?.trajetCount}}</ion-note>
+
               <ion-icon color="medium" name="chevron-forward"></ion-icon>
             </div>
           </ion-item>
@@ -65,4 +67,9 @@
       </ion-row>
     </ion-grid>
   </ion-item>
+  <ion-fab slot="fixed" vertical="bottom"  horizontal="end">
+    <ion-fab-button color="secondary" (click)="sync()">
+      <ion-icon name="sync" color="dark"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

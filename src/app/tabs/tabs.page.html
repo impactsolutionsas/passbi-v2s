@@ -1,18 +1,18 @@
 <ion-tabs #tabs (ionTabsDidChange)="setCurrentTab()">
   <ion-tab-bar slot="bottom" color="dark">
     <ion-tab-button tab="home" href="/tabs/home">
-      <ion-icon [name]="selectedTab === 'home' ? 'ticket' : 'ticket-outline'" [color]="selectedTab === 'home' ? 'light' : 'medium'"></ion-icon>
-      <ion-label [color]="selectedTab === 'home' ? 'light' : 'medium'">Vente</ion-label>
+      <ion-icon [name]="selectedTab === 'home' ? 'ticket' : 'ticket-outline'" [color]="selectedTab === 'home' ? 'secondary' : 'light'"></ion-icon>
+      <ion-label [color]="selectedTab === 'home' ? 'secondary' : 'light'">Vente</ion-label>
     </ion-tab-button>
 
     <ion-tab-button tab="repport" href="/tabs/repport">
-      <ion-icon [name]="selectedTab === 'repport' ? 'bar-chart' : 'bar-chart-outline'" [color]="selectedTab === 'repport' ? 'light' : 'medium'"></ion-icon>
-      <ion-label [color]="selectedTab === 'repport' ? 'light' : 'medium'">Rapport</ion-label>
+      <ion-icon [name]="selectedTab === 'repport' ? 'bar-chart' : 'bar-chart-outline'" [color]="selectedTab === 'repport' ? 'secondary' : 'light'"></ion-icon>
+      <ion-label [color]="selectedTab === 'repport' ? 'secondary' : 'light'">Rapport</ion-label>
     </ion-tab-button>
 
     <ion-tab-button tab="activation" href="/tabs/activation">
-      <ion-icon [name]="selectedTab === 'activation' ? 'log-out' : 'log-out-outline'" [color]="selectedTab === 'activation' ? 'light' : 'medium'"></ion-icon>
-      <ion-label [color]="selectedTab === 'activation' ? 'light' : 'medium'">Fin de service</ion-label>
+      <ion-icon [name]="selectedTab === 'activation' ? 'log-out' : 'log-out-outline'" [color]="selectedTab === 'activation' ? 'secondary' : 'light'"></ion-icon>
+      <ion-label [color]="selectedTab === 'activation' ? 'secondary' : 'light'">Fin de service</ion-label>
     </ion-tab-button>
   </ion-tab-bar>
 

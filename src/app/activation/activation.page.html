@@ -6,12 +6,15 @@
     </ion-card-header>
   </ion-card>
   <ion-card class="repport-card">
-    <ion-card-header class="empty-card-content">
+   <ion-card-header>
+    <ion-card-title>{{currentSession?.vehicule?.matricule}} - {{currentSession?.sellingDate}}</ion-card-title>
+   </ion-card-header>
+    <ion-card-content>
         <strong>Ventes Total: {{currentSession?.revenue}} CFA </strong>
-        <strong>Location: {{ sumRentals() }} CFA </strong>
-        <strong>Dépenses: {{currentSession?.expense}} CFA </strong>
-        <strong>Net à verser: {{currentSession?.solde}} CFA </strong>
-    </ion-card-header>
+        <p>Location: {{ sumRentals() }} CFA </p>
+        <p>Dépenses: {{currentSession?.expense}} CFA </p>
+        <p>Net à verser: {{currentSession?.solde}} CFA </p>
+    </ion-card-content>
     <ion-card-content *ngIf="dailyCode=== false">
       <ion-button expand="full" class="login-button" (click)="end()">
         TERMINER

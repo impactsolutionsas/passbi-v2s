@@ -35,8 +35,8 @@ export class RentalPage implements OnInit {
     private storage: Storage) {
       this.rentalForm = this.fb.group({
         companieName: ['', [Validators.required]],
-        companiePhone: ['', [Validators.required]],
-        price: ['', [Validators.required]],
+        companiePhone: [0, [Validators.required]],
+        price: [0, [Validators.required]],
         destination: ['', [Validators.required]],
       });
      }
@@ -148,14 +148,18 @@ export class RentalPage implements OnInit {
 
     async deleteRental(rentalId: string) {
       if (this.currentSession) {
+        const loading = await this.loadingController.create({
+          message: 'Suppression en cours ...',
+        });
+        await loading.present();
         const index = this.currentSession.rentals?.findIndex(rental => rental.offlineId === rentalId);
         if (index !== -1 && index !== undefined) {
           const rentalToDelete = this.currentSession.rentals![index];
           this.currentSession.revenue -= rentalToDelete.price;
           this.currentSession.solde = this.currentSession.revenue - this.currentSession.expense;
           this.currentSession.rentals?.splice(index, 1); // Supprimer l'élément
-
           await this.sessionService.updateSession(this.currentSession);
+          loading.dismiss()
         }
       }
     }

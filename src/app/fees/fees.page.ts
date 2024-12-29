@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Frais, Session } from '../services/models/session.model';
 import { Router } from '@angular/router';
-import { Platform } from '@ionic/angular';
+import { LoadingController, Platform } from '@ionic/angular';
 import { AuthService } from '../services/auth/auth.service';
 import { SessionService } from '../services/session/session.service';
 import { v4 as uuidv4 } from 'uuid';
@@ -29,6 +29,7 @@ export class FeesPage implements OnInit {
     private platform: Platform,
     private localDB: DatabaseService,
     private router: Router,
+    private loadingController: LoadingController,
     private storage: Storage
   ) {
     this.feesForm = this.fb.group({
@@ -92,12 +93,16 @@ export class FeesPage implements OnInit {
   }
   async add(){
     if (this.feesForm.valid) {
-      const controler = this.device.Reseau.Rubrics.filter(
+      const loading = await this.loadingController.create({
+        message: 'Veuillez patienter ...',
+      });
+      await loading.present();
+      const fees = this.device.Reseau.Rubrics.filter(
         (item: { id: any }) => item.id === this.feesForm.value.rubricsId
       );
       const data : Frais = {
         offlineId: uuidv4(),
-        name: controler[0].name,
+        name: fees[0].name,
         price: this.feesForm.value.price,
         rubricsId: this.feesForm.value.rubricsId
       }
@@ -105,16 +110,21 @@ export class FeesPage implements OnInit {
         this.currentSession.fees?.push(data)
         this.currentSession.expense = this.currentSession.expense+data.price
         this.currentSession.solde = this.currentSession.revenue-this.currentSession.expense
-        await this.sessionService.updateSession(this.currentSession)
+        await this.sessionService.localUpdateSession(this.currentSession)
       }
 
       this.feesForm.reset()
       this.showel(false)
+      loading.dismiss()
     }
   }
 
   async deleteFee(feeId: string) {
     if (this.currentSession && this.currentSession.fees) {
+      const loading = await this.loadingController.create({
+        message: 'Suppression en cours ...',
+      });
+      await loading.present();
       const feeToDelete = this.currentSession.fees.find(fee => fee.offlineId === feeId);
       if (feeToDelete) {
         // Retirer la dépense de la liste
@@ -125,7 +135,8 @@ export class FeesPage implements OnInit {
         this.currentSession.solde = this.currentSession.revenue - this.currentSession.expense;
 
         // Mettre à jour la session
-        await this.sessionService.updateSession(this.currentSession);
+        await this.sessionService.localUpdateSession(this.currentSession);
+        loading.dismiss()
       }
     }
   }

@@ -71,13 +71,17 @@
   <div  *ngIf="showFrom === false">
   <ion-card *ngFor="let item of controlsList">
    <ion-card-content>
-    <ion-card-title>{{item.controllerName}}</ion-card-title>
-    <ion-card-subtitle>Total tickets contrôlés: {{ item.checkedTickets }}</ion-card-subtitle>
-    <ion-card-subtitle>Total tickets fraudes: {{ item.ticketFraude }}</ion-card-subtitle>
-    <ion-card-subtitle>De: {{ item.startTime }} à {{ item.endTime }} </ion-card-subtitle>
-    <ion-card-subtitle>Commentaire: {{ item.comment }} </ion-card-subtitle>
-
+      <ion-card-title>{{item.controllerName}}</ion-card-title>
+      <ion-card-subtitle>Total tickets contrôlés: {{ item.checkedTickets }}</ion-card-subtitle>
+      <ion-card-subtitle>Total tickets fraudes: {{ item.ticketFraude }}</ion-card-subtitle>
+      <ion-card-subtitle>De: {{ item.startTime }} à {{ item.endTime }} </ion-card-subtitle>
+      <ion-card-subtitle>Commentaire: {{ item.comment }} </ion-card-subtitle>
    </ion-card-content>
+   <ion-fab vertical="bottom" horizontal="end" (click)="deleteControle(item.offlineId)">
+    <ion-fab-button color="danger">
+      <ion-icon name="trash-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
   </ion-card>
 
   </div>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Controles, Session } from '../services/models/session.model';
 import { Router } from '@angular/router';
-import { Platform } from '@ionic/angular';
+import { LoadingController, Platform } from '@ionic/angular';
 import { AuthService } from '../services/auth/auth.service';
 import { SessionService } from '../services/session/session.service';
 import { v4 as uuidv4 } from 'uuid';
@@ -31,13 +31,14 @@ export class ControlePage implements OnInit {
     private platform: Platform,
     private router: Router,
     private localDB: DatabaseService,
+    private loadingController: LoadingController,
     private storage: Storage
   ) {
     this.storage.create();
     this.controlForm = this.fb.group({
       controllerId: ['', [Validators.required]],
-      checkedTickets: ['', [Validators.required]],
-      ticketFraude: ['', [Validators.required]],
+      checkedTickets: [0, [Validators.required]],
+      ticketFraude: [0, [Validators.required]],
       comment: [''],
     });
   }
@@ -103,6 +104,10 @@ export class ControlePage implements OnInit {
   }
   async add(){
     if (this.controlForm.valid) {
+      const loading = await this.loadingController.create({
+        message: 'Veuillez patienter ...',
+      });
+      await loading.present();
       const controler = this.device.Reseau.Controller.filter(
         (item: { id: any }) => item.id === this.controlForm.value.controllerId
       );
@@ -128,6 +133,26 @@ export class ControlePage implements OnInit {
 
       this.controlForm.reset()
       this.showel(false)
+      loading.dismiss()
+    }
+  }
+
+  async deleteControle(controleId: string) {
+    if (this.currentSession && this.currentSession.controles) {
+      const loading = await this.loadingController.create({
+        message: 'Suppression en cours ...',
+      });
+      await loading.present();
+      const controleToDelete = this.currentSession.controles.find(controle => controle.offlineId === controleId);
+      if (controleToDelete) {
+        // Retirer la dépense de la liste
+        this.currentSession.controles = this.currentSession.controles.filter(controle => controle.offlineId !== controleId);
+        this.controlsList = this.currentSession.controles
+        this.currentSession.controlsCount = this.currentSession.controles?.length || 1 - 1 ;
+        // Mettre à jour la session
+        await this.sessionService.localUpdateSession(this.currentSession);
+        loading.dismiss()
+      }
     }
   }
 

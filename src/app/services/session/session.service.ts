@@ -138,13 +138,5 @@ export class SessionService {
   async localUpdateSession(session: Session): Promise<void> {
     await this.localDB.updateLocalSession(session);
     this.currentSessionSubject.next(session);
-    if (this.networkStatus$.getValue()) {
-      try {
-        await this.remoteDB.rtUpdateSession(session);
-        session.isOnline = true;
-      } catch (error) {
-        session.isOnline = false;
-      }
-    }
   }
 }
