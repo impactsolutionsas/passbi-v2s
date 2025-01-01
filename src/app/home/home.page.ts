@@ -160,7 +160,7 @@ export class HomePage implements OnInit {
       this.currentSession.solde = this.currentSession.revenue-this.currentSession.expense
       this.currentSession.lastTicket = lastTick
       this.tripCountBySession = this.currentSession.trips?.length
-      await this.sessionService.localUpdateSession(this.currentSession)
+      await this.sessionService.updateSession(this.currentSession)
       this.print(newTicket)
     }
 
@@ -206,7 +206,7 @@ export class HomePage implements OnInit {
 
       this.currentSession.trips?.push(newTrip);
       this.currentSession.trajetCount = this.currentSession.trips?.length || 1 + 1 ;
-      await this.sessionService.localUpdateSession(this.currentSession);
+      await this.sessionService.updateSession(this.currentSession);
       this.tripCountBySession = this.currentSession.trips?.length
       this.lastTrip = newTrip;
     } catch (error) {
@@ -338,6 +338,12 @@ Tarif: ${data.price} - ${data.zone}
           text: 'DÉPENSES', // Texte plus court
           handler: () => {
             this.router.navigate(['/tabs/fees']);
+          },
+        },
+        {
+          text: 'MA LIGNE', // Texte plus court
+          handler: () => {
+            this.router.navigate(['/tabs/line']);
           },
         },
         {

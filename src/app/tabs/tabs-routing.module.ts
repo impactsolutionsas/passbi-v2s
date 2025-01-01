@@ -31,6 +31,10 @@ const routes: Routes = [
           path: 'activation',
           loadChildren: () => import('../activation/activation.module').then( m => m.ActivationPageModule)
         },
+        {
+          path: 'line',
+          loadChildren: () => import('../line/line.module').then( m => m.LinePageModule)
+        },
       {
         path: '',
         redirectTo: '/tabs/home',

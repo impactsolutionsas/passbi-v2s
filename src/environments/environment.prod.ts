@@ -5,6 +5,7 @@ export const environment = {
     authDomain: "senpassbi.firebaseapp.com",
     projectId: "senpassbi",
     storageBucket: "senpassbi.firebasestorage.app",
+    databaseURL: "https://senpassbi-default-rtdb.europe-west1.firebasedatabase.app",
     messagingSenderId: "481965381123",
     appId: "1:481965381123:web:97607046fe2f593635a036"
   },

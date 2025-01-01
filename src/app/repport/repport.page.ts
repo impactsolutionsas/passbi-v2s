@@ -126,6 +126,13 @@ export class RepportPage implements OnInit {
             this.router.navigate(['/tabs/fees']);
           },
         },
+
+        {
+          text: 'MA LIGNE', // Texte plus court
+          handler: () => {
+            this.router.navigate(['/tabs/line']);
+          },
+        },
         {
           text: 'Annuler',
           role: 'cancel',
