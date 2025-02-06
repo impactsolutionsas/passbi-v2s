@@ -160,8 +160,11 @@ export class HomePage implements OnInit {
       this.currentSession.solde = this.currentSession.revenue-this.currentSession.expense
       this.currentSession.lastTicket = lastTick
       this.tripCountBySession = this.currentSession.trips?.length
-      await this.sessionService.updateSession(this.currentSession)
-      this.print(newTicket)
+      this.print(newTicket).then(async () => {
+        if (this.currentSession) {
+          await this.sessionService.updateSession(this.currentSession)
+         }
+      })
     }
 
   }

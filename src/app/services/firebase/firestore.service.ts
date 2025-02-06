@@ -13,7 +13,6 @@ export class RemoteService {
    */
   async remoteSessions(deviceId: number): Promise<Session | null> {
     const today = new Date().toLocaleDateString('fr-FR');
-
     try {
       const sessionsRef = ref(this.database, 'sessions');
       const sessionsQuery = query(sessionsRef, orderByChild('deviceId'), equalTo(deviceId));
@@ -22,9 +21,14 @@ export class RemoteService {
       const snapshot = await get(sessionsQuery);
       if (snapshot.exists()) {
         const sessions = snapshot.val();
+        console.log("🚀 ~ RemoteService ~ remoteSessions ~ sessions:", sessions)
+
+        // Filtrer les sessions pour la date actuelle
         const filteredSessions = Object.values(sessions).filter(
           (session: any) => session.sellingDate === today
         );
+        console.log("🚀 ~ RemoteService ~ remoteSessions ~ filteredSessions:", filteredSessions)
+
         return filteredSessions.length > 0 ? (filteredSessions[0] as Session) : null;
       }
 
@@ -34,6 +38,7 @@ export class RemoteService {
       return null;
     }
   }
+
 
 /**
    * Ajoute ou met à jour une session en ligne.
